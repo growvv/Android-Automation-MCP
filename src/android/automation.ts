@@ -26,12 +26,7 @@ export interface UIElement {
   description: string;
   resourceId: string;
   className: string;
-  bounds: {
-    left: number;
-    top: number;
-    right: number;
-    bottom: number;
-  };
+  bounds: [number, number, number, number]; // [x1, y1, x2, y2] format to save tokens
   clickable?: boolean;
   enabled?: boolean;
 }
@@ -214,8 +209,8 @@ export class AndroidAutomation {
     try {
       const element = await this.findElement(options);
       if (element) {
-        const centerX = (element.bounds.left + element.bounds.right) / 2;
-        const centerY = (element.bounds.top + element.bounds.bottom) / 2;
+        const centerX = (element.bounds[0] + element.bounds[2]) / 2;
+        const centerY = (element.bounds[1] + element.bounds[3]) / 2;
         await this.tap(centerX, centerY);
         return `Found and tapped element: ${element.description || element.resourceId || element.className}`;
       } else {
@@ -354,8 +349,8 @@ export class AndroidAutomation {
       }
 
       // Tap on search box
-      const centerX = (searchElement.bounds.left + searchElement.bounds.right) / 2;
-      const centerY = (searchElement.bounds.top + searchElement.bounds.bottom) / 2;
+      const centerX = (searchElement.bounds[0] + searchElement.bounds[2]) / 2;
+      const centerY = (searchElement.bounds[1] + searchElement.bounds[3]) / 2;
       await this.tap(centerX, centerY);
       
       // Reduced wait time for search box to focus
@@ -567,12 +562,12 @@ export class AndroidAutomation {
           description: descMatch ? descMatch[1] : '',
           resourceId: resourceMatch ? resourceMatch[1] : '',
           className: classMatch ? classMatch[1] : '',
-          bounds: {
-            left: parseInt(boundsMatch[1]),
-            top: parseInt(boundsMatch[2]),
-            right: parseInt(boundsMatch[3]),
-            bottom: parseInt(boundsMatch[4])
-          }
+          bounds: [
+            parseInt(boundsMatch[1]), // x1 (left)
+            parseInt(boundsMatch[2]), // y1 (top)
+            parseInt(boundsMatch[3]), // x2 (right)
+            parseInt(boundsMatch[4])  // y2 (bottom)
+          ]
           // text, clickable, enabled are now optional and not included
         };
         elements.push(element);

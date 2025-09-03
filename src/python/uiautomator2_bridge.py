@@ -189,6 +189,18 @@ class UIAutomator2Bridge:
             
             if element.exists:
                 info = element.info
+                bounds = info.get("bounds", {})
+                # Convert bounds from object format to array format [x1, y1, x2, y2] to save tokens
+                if isinstance(bounds, dict) and "left" in bounds:
+                    bounds_array = [
+                        bounds.get("left", 0),
+                        bounds.get("top", 0), 
+                        bounds.get("right", 0),
+                        bounds.get("bottom", 0)
+                    ]
+                else:
+                    bounds_array = [0, 0, 0, 0]
+                
                 return {
                     "success": True,
                     "found": True,
@@ -198,7 +210,7 @@ class UIAutomator2Bridge:
                         "resourceId": info.get("resourceName", ""),
                         "className": info.get("className", ""),
                         "packageName": info.get("packageName", ""),
-                        "bounds": info.get("bounds", {}),
+                        "bounds": bounds_array,
                         "clickable": info.get("clickable", False),
                         "enabled": info.get("enabled", True),
                         "focusable": info.get("focusable", False),
@@ -436,6 +448,38 @@ class UIAutomator2Bridge:
         except Exception as e:
             return {"error": str(e)}
 
+    def get_installed_apps(self) -> Dict[str, Any]:
+        """Get list of installed user applications"""
+        if not self.connected:
+            return {"error": "Device not connected"}
+        
+        try:
+            # Get installed user apps (3rd party apps)
+            apps = self.device.app_list_user()
+            app_list = []
+            
+            for package_name in apps:
+                # Get app name if possible, fallback to package name
+                try:
+                    app_info = self.device.app_info(package_name)
+                    app_name = app_info.get("app_name", package_name)
+                except:
+                    app_name = package_name
+                
+                app_list.append({
+                    "packageName": package_name,
+                    "appName": app_name
+                })
+            
+            return {
+                "success": True,
+                "data": {
+                    "apps": app_list
+                }
+            }
+        except Exception as e:
+            return {"error": str(e)}
+
 
 def main():
     """Main function to handle JSON commands from stdin"""
@@ -508,6 +552,8 @@ def main():
                     result = bridge.screen_off()
                 elif action == "unlock":
                     result = bridge.unlock()
+                elif action == "get_installed_apps":
+                    result = bridge.get_installed_apps()
                 
                 # Send result
                 print(json.dumps(result), flush=True)

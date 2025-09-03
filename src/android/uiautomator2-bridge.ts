@@ -21,7 +21,7 @@ export interface UIAutomator2Response {
     description: string;
     resourceId: string;
     className: string;
-    bounds: any;
+    bounds: [number, number, number, number]; // [x1, y1, x2, y2] format to save tokens
     clickable: boolean;
     enabled: boolean;
   };
