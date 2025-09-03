@@ -4,6 +4,8 @@
 
 一个基于MCP (Model Context Protocol) 的Android自动化服务器，让你可以用自然语言指令控制Android应用，支持复杂的自动化流程。
 
+![Screenshot on Cherry Studio](./res/image.png)
+
 ---
 
 ## 🎯 面向用户 - 快速使用
@@ -33,6 +35,15 @@
 }
 ```
 
+### 🤖 使用指南
+在 MPC 中使用 Android 自动化助手，只需发送自然语言指令（推荐先使用 [prompt.md](./prompt.md) 预设环境），例如：
+
+- "打开微信并发送"hello world""
+- "在浏览器中搜索'AI'并总结页面内容"
+- "打开微博首页，截图并保存"
+
+MCP 将自动识别指令并调用相应的 Android 自动化工具。
+
 ---
 
 ## 🛠️ 面向开发者 - 开发指南
@@ -50,8 +61,8 @@
 
 ```bash
 # 1. 克隆项目
-git clone <repository-url>
-cd andriod_mcp
+git clone https://github.com/growvv/Android-Automation-MCP
+cd Android-Automation-MCP
 
 # 2. 安装依赖
 npm install
@@ -64,7 +75,7 @@ npm run build
 npm start
 ```
 
-### 🔧 CherryStudio开发配置
+### 🔧 MCP客户端开发配置
 
 使用开发配置文件：
 
@@ -80,27 +91,6 @@ npm start
   }
 }
 ```
-
-### 🔧 添加新功能
-
-#### 1. 添加新的MCP工具
-```typescript
-// src/mcp/server.ts
-server.addTool({
-  name: "android_new_feature",
-  description: "新功能描述",
-  inputSchema: {
-    type: "object",
-    properties: {
-      param: { type: "string", description: "参数描述" }
-    }
-  }
-}, async (args) => {
-  // 实现功能逻辑
-});
-```
-
----
 
 ## 📄 许可证
 

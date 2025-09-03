@@ -3,10 +3,7 @@
     "android-mcp-build": {
       "command": "node",
       "args": ["D:\\Code\\andriod_mcp\\dist\\index.js"],
-      "description": "使用编译后代码的Android自动化MCP服务器 (需要先运行npm run build)",
-      "env": {
-        "NODE_ENV": "production"
-      }
+      "description": "使用编译后代码的Android自动化MCP服务器 (需要先运行npm run build)"
     }
   }
 }

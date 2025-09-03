@@ -16,6 +16,10 @@
     "prepare": "npm run build"
   },
   "description": "Android MCP Server for automated app control using uiautomator2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/growvv/Android-Automation-MCP.git"
+  },
   "keywords": [
     "android",
     "automation",
