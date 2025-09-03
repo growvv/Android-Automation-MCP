@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "android-automation": {
+      "command": "npx",
+      "args": ["android-mcp"],
+      "description": "Android自动化助手 - 通过自然语言控制你的Android设备",
+      "env": {}
+    }
+  }
+}

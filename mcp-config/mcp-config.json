@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "android-mcp-local": {
+      "command": "node",
+      "args": ["D:\\Code\\andriod_mcp\\dist\\index.js"],
+      "description": "本地Android自动化MCP服务器",
+      "prompts": [
+        {
+          "name": "android_automation_guide",
+          "description": "Android自动化操作指南",
+          "content": "你是一个Android自动化助手，可以帮助用户：\n\n1. **应用操作**：\n   - 打开指定应用\n   - 搜索内容\n   - 点击按钮和链接\n   - 输入文本\n\n2. **界面交互**：\n   - 截取屏幕截图\n   - 滚动页面\n   - 返回上一页\n   - 回到主屏幕\n\n3. **高级功能**：\n   - XPath精确定位\n   - 自然语言任务执行\n   - 应用列表获取\n   - UI组件信息分析\n\n**使用提示**：\n- 描述你想要执行的操作，我会自动选择合适的工具\n- 支持中文自然语言指令\n- 截图自动压缩至128KB以下\n- 确保设备已连接并开启USB调试"
+        },
+        {
+          "name": "common_workflows",
+          "description": "常用自动化流程",
+          "content": "## 常用操作流程：\n\n### 1. 应用搜索流程\n```\n打开[应用名] → 找到搜索框 → 输入搜索内容 → 点击搜索\n```\n\n### 2. 内容浏览流程\n```\n截图查看界面 → 滚动浏览内容 → 点击感兴趣项目\n```\n\n### 3. 设置配置流程\n```\n打开设置 → 导航到目标选项 → 修改配置 → 保存更改\n```\n\n### 4. 社交互动流程\n```\n打开社交应用 → 搜索用户/内容 → 点赞/评论/分享\n```\n\n**示例指令**：\n- \"打开微信，搜索张三\"\n- \"在微博搜索Android开发\"\n- \"截图并告诉我当前页面有什么\"\n- \"向下滚动查看更多内容\""
+        }
+      ]
+    },
+    "android-mcp-global": {
+      "command": "android-mcp",
+      "args": [],
+      "description": "全局安装的Android自动化MCP服务器"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "android-mcp",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "NODE_OPTIONS=\"--loader ts-node/esm\" ts-node --esm src/index.ts",
+    "dev:simple": "tsc && node dist/index.js",
+    "start": "node dist/index.js",
+    "cli": "node cli.js",
+    "test": "node test/test.js",
+    "lint": "echo \"No linting configured yet\"",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepare": "npm run build"
+  },
+  "description": "Android MCP Server for automated app control using uiautomator2",
+  "keywords": [
+    "android",
+    "automation",
+    "mcp",
+    "uiautomator2"
+  ],
+  "bin": {
+    "android-mcp": "./dist/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@devicefarmer/adbkit": "^3.3.8",
+    "@modelcontextprotocol/sdk": "^1.17.4",
+    "@types/express": "^5.0.3",
+    "@types/ws": "^8.18.1",
+    "axios": "^1.11.0",
+    "child_process": "^1.0.2",
+    "express": "^5.1.0",
+    "sharp": "^0.34.3",
+    "uiautomator2": "^1.0.2",
+    "ws": "^8.18.3"
+  }
+}
